@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20230905115904_Initial")]
+    [Migration("20230907075405_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,17 +26,23 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Entities.ProductItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdProduct")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProduct"));
 
                     b.Property<string>("productName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("productPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productStock")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdProduct");
 
                     b.ToTable("Products", (string)null);
                 });
