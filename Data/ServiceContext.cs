@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using System.Reflection.Emit;
 
 namespace Data
 {
@@ -14,6 +15,8 @@ namespace Data
     {
         public ServiceContext(DbContextOptions<ServiceContext> options) : base(options) { }
         public DbSet<ProductItem> Products { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -21,6 +24,13 @@ namespace Data
             {
                 entity.ToTable("Products");
             });
+
+            builder.Entity<Categories>(entity =>
+            {
+                entity.ToTable("Categories");
+            });
+
+
 
         }
     }

@@ -6,6 +6,7 @@ using System.Security.Authentication;
 using System.Web.Http.Cors;
 using Multiverse.IServices;
 using Multiverse.Services;
+using Microsoft.Extensions.Logging;
 
 
 namespace Multiverse.Controllers
@@ -19,11 +20,13 @@ namespace Multiverse.Controllers
     {
         private readonly IProductService _productService;
         private readonly ServiceContext _serviceContext;
+        private readonly ILogger<ProductController> _logger;
 
-        public ProductController(IProductService productService, ServiceContext serviceContext)
+        public ProductController(IProductService productService, ServiceContext serviceContext, ILogger<ProductController> logger)
         {
             _productService = productService;
             _serviceContext = serviceContext;
+            _logger = logger;
         }
 
         [HttpGet(Name = "GetProducts")]
@@ -40,39 +43,58 @@ namespace Multiverse.Controllers
             return Ok(products);
         }
 
+
+
         [HttpPost(Name = "InsertProduct")]
-        public int Post([FromBody] ProductItem productItem)
+        public IActionResult Post([FromBody] ProductItem productItem)
         {
-            
-            return _productService.insertProduct(productItem);
+            try
+            {
+                
+                var productId = _productService.insertProduct(productItem);
+
+                return Ok(new { IdProduct = productId });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+            }
         }
+
+
+
 
         [HttpPut("{id}", Name = "UpdateProduct")]
         public IActionResult Put(int id, [FromBody] ProductItem updatedProductItem)
         {
-            // Busca el producto existente por ID
             var existingProductItem = _serviceContext.Products.FirstOrDefault(p => p.IdProduct == id);
 
             if (existingProductItem == null)
             {
-                return NotFound(); // Devuelve 404 si el producto no existe
+                return NotFound();
             }
             else
             {
-                // Actualiza los datos del producto existente con los nuevos datos
-                existingProductItem.productName = updatedProductItem.productName;
-                existingProductItem.productPrice = updatedProductItem.productPrice;
-                existingProductItem.productStock = updatedProductItem.productStock;
-
-                // Llama al servicio para guardar los cambios en la base de datos
                 try
                 {
+                    // Validación y lógica aquí si es necesario
+
+                    // Verifica si se proporciona una nueva URL de imagen de Cloudinary
+                    if (!string.IsNullOrEmpty(updatedProductItem.ProductImageURL))
+                    {
+                        existingProductItem.ProductImageURL = updatedProductItem.ProductImageURL;
+                    }
+
+                    existingProductItem.productName = updatedProductItem.productName;
+                    existingProductItem.productPrice = updatedProductItem.productPrice;
+                    existingProductItem.productStock = updatedProductItem.productStock;
+
                     _productService.UpdateProduct(existingProductItem);
-                    return Ok(existingProductItem); // Devuelve el producto actualizado
+
+                    return Ok(existingProductItem);
                 }
                 catch (Exception ex)
                 {
-                    // Maneja cualquier excepción que pueda ocurrir al guardar
                     return StatusCode(500, $"Error interno del servidor: {ex.Message}");
                 }
             }

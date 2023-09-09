@@ -14,5 +14,9 @@ namespace Entities
         public string productName { get; set; }
         public int productPrice { get; set; }
         public int productStock { get; set; }
+        public string ProductImageURL { get; set; }
+
+
+
     }
 }

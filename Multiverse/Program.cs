@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoriesService, CategoriesService>();
 
 
 
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<ServiceContext>(
 options.UseSqlServer("name=ConnectionStrings:ServiceContext"));
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

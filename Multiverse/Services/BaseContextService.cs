@@ -8,6 +8,7 @@ namespace Multiverse.Services
         protected BaseContextService(ServiceContext serviceContext)
         {
             _serviceContext = serviceContext;
+
         }
     }
 }
