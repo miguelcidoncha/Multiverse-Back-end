@@ -1,5 +1,10 @@
 using Data;
+using Entities;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Multiverse.IServices;
+using Multiverse.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +18,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ServiceContext>(
  options =>
 options.UseSqlServer("name=ConnectionStrings:ServiceContext"));
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class ProductItem
+    public class RollItem
     {
-        public int Id { get; set; }
-        public string productName { get; set; }
+        public ushort IdRoll { get; set; }
+        public string RollName { get; set; }
+
     }
 }

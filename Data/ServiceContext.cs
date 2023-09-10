@@ -13,13 +13,25 @@ namespace Data
     public class ServiceContext : DbContext
     {
         public ServiceContext(DbContextOptions<ServiceContext> options) : base(options) { }
-        public DbSet<ProductItem> Products { get; set; }
-        
+
+
+        public DbSet<UserItem> UserItems { get; set; }
+        public DbSet<RollItem> RollItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<ProductItem>(entity =>
+           
+            builder.Entity<UserItem>(entity =>
             {
-                entity.ToTable("Products");
+                entity.ToTable("Users");
+                entity.HasKey(u => u.IdUsuario);
+                entity.HasOne<RollItem>().WithMany().HasForeignKey(u => u.IdRoll);
+            });
+
+            builder.Entity<RollItem>(entity =>
+            {
+                entity.ToTable("RollUser");
+                entity.HasKey(u => u.IdRoll);
             });
 
         }
