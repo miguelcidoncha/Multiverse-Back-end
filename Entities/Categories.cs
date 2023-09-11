@@ -13,6 +13,8 @@ namespace Entities
         public int IdCategories { get; set; }
         public string CategoriesName { get; set; }
 
+       
 
+       
     }
 }

@@ -10,12 +10,29 @@ namespace Multiverse.Services
         { 
         }
 
+
+
+
         public int insertProduct(ProductItem productItem)
         {
-            _serviceContext.Products.Add(productItem);
-            _serviceContext.SaveChanges();
-            return productItem.IdProduct;
+            try
+            {
+               
+               
+
+                _serviceContext.Products.Add(productItem);
+                _serviceContext.SaveChanges();
+
+                return productItem.IdProduct;
+            }
+            catch (Exception ex)
+            {
+               
+                throw ex;
+            }
         }
+
+
 
         void IProductService.UpdateProduct(ProductItem existingProductItem)
         {
@@ -36,5 +53,7 @@ namespace Multiverse.Services
                 throw new InvalidOperationException("El producto no existe.");
             }
         }
+
+       
     }
 }

@@ -50,7 +50,6 @@ namespace Multiverse.Controllers
         {
             try
             {
-                
                 var productId = _productService.insertProduct(productItem);
 
                 return Ok(new { IdProduct = productId });
@@ -60,6 +59,7 @@ namespace Multiverse.Controllers
                 return StatusCode(500, $"Error interno del servidor: {ex.Message}");
             }
         }
+
 
 
 
@@ -77,9 +77,7 @@ namespace Multiverse.Controllers
             {
                 try
                 {
-                    // Validación y lógica aquí si es necesario
-
-                    // Verifica si se proporciona una nueva URL de imagen de Cloudinary
+                    
                     if (!string.IsNullOrEmpty(updatedProductItem.ProductImageURL))
                     {
                         existingProductItem.ProductImageURL = updatedProductItem.ProductImageURL;
@@ -107,7 +105,7 @@ namespace Multiverse.Controllers
         [HttpDelete("{productId}", Name = "DeleteProduct")]
         public IActionResult Delete(int productId)
         {
-            if (productId > 0) // Verifica que el productId sea válido (puedes ajustar la validación según tus requisitos)
+            if (productId > 0) 
             {
                 _productService.DeleteProduct(productId);
 
@@ -115,7 +113,7 @@ namespace Multiverse.Controllers
             }
             else
             {
-                return BadRequest("El productId no es válido"); // Devuelve un BadRequest en lugar de una excepción
+                return BadRequest("El productId no es válido"); 
             }
         }
     }

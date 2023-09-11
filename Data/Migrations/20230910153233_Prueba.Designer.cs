@@ -3,6 +3,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    partial class ServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20230910153233_Prueba")]
+    partial class Prueba
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProduct"));
 
-                    b.Property<int>("IdCategories")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProductImageURL")
@@ -65,18 +68,25 @@ namespace Data.Migrations
 
                     b.HasKey("IdProduct");
 
-                    b.HasIndex("IdCategories");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Entities.ProductItem", b =>
                 {
-                    b.HasOne("Entities.Categories", null)
-                        .WithMany()
-                        .HasForeignKey("IdCategories")
+                    b.HasOne("Entities.Categories", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Entities.Categories", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

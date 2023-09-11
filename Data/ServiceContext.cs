@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using System.Reflection.Emit;
+using Data;
 
 namespace Data
 {
@@ -23,16 +24,19 @@ namespace Data
             builder.Entity<ProductItem>(entity =>
             {
                 entity.ToTable("Products");
+                entity.HasOne<Categories>().WithMany().HasForeignKey(p => p.IdCategories);
+                entity.HasKey(p => p.IdProduct);
             });
 
             builder.Entity<Categories>(entity =>
             {
                 entity.ToTable("Categories");
             });
-
-
-
         }
+
+
+
+    }
     }
     public class ServiceContextFactory : IDesignTimeDbContextFactory<ServiceContext>
     {
@@ -49,5 +53,5 @@ namespace Data
             return new ServiceContext(optionsBuilder.Options);
         }
     }
-}
+
 
