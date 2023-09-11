@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiverse", "Multiverse\Multiverse.csproj", "{598643AA-76E9-4A27-AE97-4D3C022A4DC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiverse", "Multiverse\Multiverse.csproj", "{598643AA-76E9-4A27-AE97-4D3C022A4DC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{031206D3-1758-46A3-A6F1-1BDCF5D372B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{031206D3-1758-46A3-A6F1-1BDCF5D372B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{511920D3-908A-4092-BE69-028B93D6FB56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{511920D3-908A-4092-BE69-028B93D6FB56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

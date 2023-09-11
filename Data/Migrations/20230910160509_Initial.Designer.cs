@@ -3,6 +3,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    partial class ServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20230910160509_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,24 +24,6 @@ namespace Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Entities.Categories", b =>
-                {
-                    b.Property<int>("IdCategories")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategories"));
-
-                    b.Property<string>("CategoriesName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdCategories");
-
-                    b.ToTable("Categories", (string)null);
-                });
-
-            modelBuilder.Entity("Entities.ProductItem", b =>
             modelBuilder.Entity("Entities.RollItem", b =>
                 {
                     b.Property<int>("IdRoll")
@@ -58,19 +43,10 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Entities.UserItem", b =>
                 {
-                    b.Property<int>("IdProduct")
                     b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProduct"));
-
-                    b.Property<int>("IdCategories")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductImageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
 
                     b.Property<string>("Email")
@@ -88,15 +64,6 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("productPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("productStock")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdProduct");
-
-                    b.HasIndex("IdCategories");
                     b.HasKey("IdUsuario");
 
                     b.HasIndex("IdRoll");
@@ -109,15 +76,6 @@ namespace Data.Migrations
                     b.HasOne("Entities.RollItem", null)
                         .WithMany()
                         .HasForeignKey("IdRoll")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Entities.ProductItem", b =>
-                {
-                    b.HasOne("Entities.Categories", null)
-                        .WithMany()
-                        .HasForeignKey("IdCategories")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
