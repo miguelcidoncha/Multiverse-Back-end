@@ -63,6 +63,7 @@ Screen images will be available here shortly. Stay tuned! <br>
 
 ## Next Steps 🔜
 
+In the future, we intend to merge the Front-end (https://github.com/miguelcidoncha/Multiverse-Project) with this Back-end repository. The goal is to transform Multiverse into a FullStack website. Additionally, we want to continue enhancing our database by storing a greater variety of products and categories, making our e-commerce site more attractive, not only visually as we have previously mentioned in the other repository but also by providing a more comprehensive product search. Likewise, we will continue working on maintaining our FullStack website to make it increasingly stable and dynamic, allowing us to maximize performance both for us as administrators and for our customers.
 
 ## Authors 👨‍💻👩‍💻
 
