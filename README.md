@@ -18,6 +18,7 @@ Screen images will be available here shortly. Stay tuned! <br>
 
 ## Stacks 🖥️
 ● Microsoft Visual Studio 2022 <br>
+● SQL Server <br>
 ● C# <br>
 ● Swagger <br>
 ● GitHub <br>
