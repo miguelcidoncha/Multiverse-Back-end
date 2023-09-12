@@ -55,7 +55,17 @@ namespace Data
             builder.Entity<OrderItem>(entity =>
             {
                 entity.ToTable("Orders");
+                entity.HasKey(dp => dp.IdOrder);
+                entity.HasOne<UserItem>()
+                    .WithMany()
+                    .HasForeignKey(dp => dp.IdUsuario);
+                entity.HasOne<ProductItem>()
+                   .WithMany()
+                   .HasForeignKey(dp => dp.IdProduct);
+
             });
+
+            
         }
 
 

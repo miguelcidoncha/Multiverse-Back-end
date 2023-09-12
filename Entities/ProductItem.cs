@@ -17,7 +17,7 @@ namespace Entities
         public string ProductImageURL { get; set; }
 
         public int IdCategories { get; set; }
-        //public Categories IdCategories { get; set; }
+
 
     }
 }

@@ -17,9 +17,6 @@ namespace Multiverse.Services
         {
             try
             {
-
-
-
                 _serviceContext.Orders.Add(orderItem);
                 _serviceContext.SaveChanges();
 
