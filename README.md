@@ -5,7 +5,7 @@
 
 ## Project Description 🚀
 
-"Multiverse-Back-End" is the continuation of the project "Multiverse-Proyect" (https://github.com/miguelcidoncha/Multiverse-Proyect). As we previously described, Multiverse is an e-commerce website designed to effectively sell merchandise products and provide customers with a satisfying shopping experience. In this repository, we have worked on the Back-end content related to the database. We have built an application to store all the data for our merchandise products, categorizing them and also storing customer information. Additionally, in this application, we will also store all the order information.
+"Multiverse-Back-End" is the continuation of the project "Multiverse-Project" (https://github.com/miguelcidoncha/Multiverse-Project). As we previously described, Multiverse is an e-commerce website designed to effectively sell merchandise products and provide customers with a satisfying shopping experience. In this repository, we have worked on the Back-end content related to the database. We have built an application to store all the data for our merchandise products, categorizing them and also storing customer information. Additionally, in this application, we will also store all the order information.
 
 ## Screenshots (Coming Soon) 📷
 
