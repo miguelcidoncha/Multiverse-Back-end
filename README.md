@@ -5,7 +5,7 @@
 
 ## Project Description 🚀
 
-Multiverse is an e-commerce website designed to effectively sell merchandise products and provide customers with a satisfying shopping experience. It's a design and development project with a free theme in which we will be working on both the Front-end and Back-end. This repository contains the Front-end files along with the development of a fake API that allows us to work on the application without relying on real data or external system connections.
+"Multiverse-Back-End" is the continuation of the project "Multiverse-Proyect" (https://github.com/miguelcidoncha/Multiverse-Proyect). As we previously described, Multiverse is an e-commerce website designed to effectively sell merchandise products and provide customers with a satisfying shopping experience. In this repository, we have worked on the Back-end content related to the database. We have built an application to store all the data for our merchandise products, categorizing them and also storing customer information. Additionally, in this application, we will also store all the order information.
 
 ## Screenshots (Coming Soon) 📷
 
