@@ -59,7 +59,14 @@ Screen images will be available here shortly. Stay tuned! <br>
 <img src="Campturas BootCamp/Captura de pantalla 2023-08-07 091818.png" width="250" height="200">
 
 ## Installation Process ⬆️
-
+1. Clone the GitHub repository: https://github.com/miguelcidoncha/Multiverse-Back-end.
+2. Open the file using Microsoft Visual Studio 2022.
+3. Open View/Server Explorer and add the connection to your computer using SQL Server.
+4. In appsettings.json, add your SQL Server connection under "ServiceContext". Obtain information from properties.
+5. Compile the code from Microsoft Visual Studio 2022.
+6. Once installed, in Swagger, to add content, you need to enter the Administrator 1 query: (Coming soon).
+7. Create, modify, and delete content in Swagger.
+8. View the stored data in the SQL Server tables.
 
 ## Next Steps 🔜
 
