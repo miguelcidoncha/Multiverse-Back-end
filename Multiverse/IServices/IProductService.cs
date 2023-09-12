@@ -7,6 +7,6 @@ namespace Multiverse.IServices
         int insertProduct(ProductItem productItem);
         void UpdateProduct(ProductItem productItem);
         void DeleteProduct(int productId);
-       
+
     }
 }

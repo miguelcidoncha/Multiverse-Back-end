@@ -51,7 +51,13 @@ namespace Multiverse.Services
         public UserItem AuthenticateUser(string userName, string password)
         {
             // Realiza la autenticación del usuario según tu lógica personalizada aquí
-            return _serviceContext.UserItems.FirstOrDefault(u => u.UserName == userName && u.Password == password && u.IdRoll == 1);
+            return _serviceContext.UserItems.FirstOrDefault(u => u.UserName == userName && u.Password == password && u.IdRol == 1);
+        }
+
+        public UserItem GetUserByUserName(string userName)
+        {
+            // Busca un usuario por su nombre de usuario en la base de datos
+            return _serviceContext.UserItems.FirstOrDefault(u => u.UserName == userName);
         }
     }
 }

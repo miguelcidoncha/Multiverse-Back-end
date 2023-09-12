@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20230911145808_Categories")]
-    partial class Categories
+    [Migration("20230912075014_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,19 @@ namespace Data.Migrations
                     b.HasKey("IdCategories");
 
                     b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.OrderItem", b =>
+                {
+                    b.Property<int>("IdOrder")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrder"));
+
+                    b.HasKey("IdOrder");
+
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Entities.ProductItem", b =>
@@ -73,11 +86,67 @@ namespace Data.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
+            modelBuilder.Entity("Entities.RolItem", b =>
+                {
+                    b.Property<int>("IdRol")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRol"));
+
+                    b.Property<string>("RolName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdRol");
+
+                    b.ToTable("RollUser", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.UserItem", b =>
+                {
+                    b.Property<int>("IdUsuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdRol")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdUsuario");
+
+                    b.HasIndex("IdRol");
+
+                    b.ToTable("Users", (string)null);
+                });
+
             modelBuilder.Entity("Entities.ProductItem", b =>
                 {
                     b.HasOne("Entities.Categories", null)
                         .WithMany()
                         .HasForeignKey("IdCategories")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.UserItem", b =>
+                {
+                    b.HasOne("Entities.RolItem", null)
+                        .WithMany()
+                        .HasForeignKey("IdRol")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

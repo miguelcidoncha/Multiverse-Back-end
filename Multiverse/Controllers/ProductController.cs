@@ -29,6 +29,26 @@ namespace Multiverse.Controllers
             _logger = logger;
         }
 
+
+        [HttpGet("ByCategory/{categoryId}", Name = "GetProductsByCategoryId")]
+        public IActionResult GetProductsByCategoryId(int categoryId)
+        {
+            IQueryable<ProductItem> productsQuery = _serviceContext.Set<ProductItem>();
+
+            if (categoryId > 0)
+            {
+                productsQuery = productsQuery.Where(product => product.IdCategories == categoryId);
+            }
+            else
+            {
+                return BadRequest("El categoryId no es válido");
+            }
+
+            var products = productsQuery.ToList();
+            return Ok(products);
+        }
+
+
         [HttpGet(Name = "GetProducts")]
         public IActionResult GetProducts(string productName = null)
         {
@@ -46,17 +66,24 @@ namespace Multiverse.Controllers
 
 
         [HttpPost(Name = "InsertProduct")]
-        public IActionResult Post([FromBody] ProductItem productItem)
-        {
-            try
-            {
-                var productId = _productService.insertProduct(productItem);
 
-                return Ok(new { IdProduct = productId });
-            }
-            catch (Exception ex)
+        public int Post([FromQuery] string userUser_Name, [FromQuery] string userPassword, [FromBody] ProductItem productItem)
+        {
+            var seletedUser = _serviceContext.Set<UserItem>()
+                               .Where(u => u.UserName == userUser_Name
+                                    && u.Password == userPassword
+                                    && u.IdRol == 1)
+                                .FirstOrDefault();
+
+
+            if (seletedUser != null)
             {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+                return _productService.insertProduct(productItem);
+
+            }
+            else
+            {
+                throw new InvalidCredentialException("Usuario no permitido");
             }
         }
 
@@ -65,8 +92,19 @@ namespace Multiverse.Controllers
 
 
         [HttpPut("{id}", Name = "UpdateProduct")]
-        public IActionResult Put(int id, [FromBody] ProductItem updatedProductItem)
+        public IActionResult Put(int id, [FromBody] ProductItem updatedProductItem, [FromQuery] string userUser_Name, [FromQuery] string userPassword)
         {
+            var selectedUser = _serviceContext.Set<UserItem>()
+               .Where(u => u.UserName == userUser_Name
+                    && u.Password == userPassword
+                    && u.IdRol == 1)
+               .FirstOrDefault();
+
+            if (selectedUser == null)
+            {
+                throw new InvalidCredentialException("Usuario no permitido");
+            }
+
             var existingProductItem = _serviceContext.Products.FirstOrDefault(p => p.IdProduct == id);
 
             if (existingProductItem == null)
@@ -77,7 +115,6 @@ namespace Multiverse.Controllers
             {
                 try
                 {
-                    
                     if (!string.IsNullOrEmpty(updatedProductItem.ProductImageURL))
                     {
                         existingProductItem.ProductImageURL = updatedProductItem.ProductImageURL;
@@ -98,14 +135,21 @@ namespace Multiverse.Controllers
             }
         }
 
-
-
-
-
         [HttpDelete("{productId}", Name = "DeleteProduct")]
-        public IActionResult Delete(int productId)
+        public IActionResult Delete(int productId, [FromQuery] string userUser_Name, [FromQuery] string userPassword)
         {
-            if (productId > 0) 
+            var selectedUser = _serviceContext.Set<UserItem>()
+               .Where(u => u.UserName == userUser_Name
+                    && u.Password == userPassword
+                    && u.IdRol == 1)
+               .FirstOrDefault();
+
+            if (selectedUser == null)
+            {
+                throw new InvalidCredentialException("Usuario no permitido");
+            }
+
+            if (productId > 0)
             {
                 _productService.DeleteProduct(productId);
 
@@ -113,8 +157,9 @@ namespace Multiverse.Controllers
             }
             else
             {
-                return BadRequest("El productId no es válido"); 
+                return BadRequest("El productId no es válido");
             }
         }
+
     }
 }
