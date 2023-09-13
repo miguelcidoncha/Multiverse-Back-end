@@ -19,7 +19,9 @@ namespace Multiverse.Services
             {
                
                
-
+                var category = _serviceContext.Set<Categories>().Where(c => c.CategoriesName == productItem.type).FirstOrDefault();
+                var categoryId = category.IdCategories;
+                productItem.IdCategories = categoryId;
                 _serviceContext.Products.Add(productItem);
                 _serviceContext.SaveChanges();
 

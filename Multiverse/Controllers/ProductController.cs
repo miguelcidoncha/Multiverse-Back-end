@@ -56,7 +56,7 @@ namespace Multiverse.Controllers
 
             if (!string.IsNullOrEmpty(productName))
             {
-                productsQuery = productsQuery.Where(product => product.productName == productName);
+                productsQuery = productsQuery.Where(product => product.name == productName);
             }
 
             var products = productsQuery.ToList();
@@ -65,26 +65,28 @@ namespace Multiverse.Controllers
 
 
 
-        [HttpPost(Name = "InsertProduct")]
+        //[HttpPost(Name = "InsertProduct")]
+        [HttpPost(Name = "Post")]
 
-        public int Post([FromQuery] string userUser_Name, [FromQuery] string userPassword, [FromBody] ProductItem productItem)
+        //public int Post([FromQuery] string userUser_Name, [FromQuery] string userPassword, [FromBody] ProductItem productItem)
+        public int Post([FromBody] ProductItem productItem )
         {
-            var seletedUser = _serviceContext.Set<UserItem>()
-                               .Where(u => u.UserName == userUser_Name
-                                    && u.Password == userPassword
-                                    && u.IdRol == 1)
-                                .FirstOrDefault();
+            //var seletedUser = _serviceContext.Set<UserItem>()
+            //                   .Where(u => u.UserName == userUser_Name
+            //                        && u.Password == userPassword
+            //                        && u.IdRol == 1)
+            //                    .FirstOrDefault();
 
 
-            if (seletedUser != null)
-            {
+            //if (seletedUser != null)
+            //{
                 return _productService.insertProduct(productItem);
 
-            }
-            else
-            {
-                throw new InvalidCredentialException("Usuario no permitido");
-            }
+            //}
+            //else
+            //{
+            //    throw new InvalidCredentialException("Usuario no permitido");
+            //}
         }
 
 
@@ -115,14 +117,14 @@ namespace Multiverse.Controllers
             {
                 try
                 {
-                    if (!string.IsNullOrEmpty(updatedProductItem.ProductImageURL))
+                    if (!string.IsNullOrEmpty(updatedProductItem.image))
                     {
-                        existingProductItem.ProductImageURL = updatedProductItem.ProductImageURL;
+                        existingProductItem.image = updatedProductItem.image;
                     }
 
-                    existingProductItem.productName = updatedProductItem.productName;
-                    existingProductItem.productPrice = updatedProductItem.productPrice;
-                    existingProductItem.productStock = updatedProductItem.productStock;
+                    existingProductItem.name = updatedProductItem.name;
+                    existingProductItem.price = updatedProductItem.price;
+                    existingProductItem.description = updatedProductItem.description;
 
                     _productService.UpdateProduct(existingProductItem);
 

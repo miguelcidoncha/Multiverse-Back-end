@@ -24,7 +24,16 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddDbContext<ServiceContext>(
  options =>
 options.UseSqlServer("name=ConnectionStrings:ServiceContext"));
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
@@ -36,7 +45,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
