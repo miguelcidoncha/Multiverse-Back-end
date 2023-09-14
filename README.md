@@ -8,7 +8,7 @@
 
 ## Screenshots 📷
 
-<img src="images/Back.png" width="auto" height="200"><img src="images/Back2.png" width="auto" height="200"><img src="images/Swagger.png" width="auto" height="200"><img src="images/Swagger2.png" width="auto" height="200"><img src="images/Swagger3.png" width="auto" height="200"><img src="images/Swagger4.png" width="auto" height="200"><img src="images/Diagrama.png" width="auto" height="200">
+<img src="images/Back.png" width="auto" height="200"><img src="images/Back2.png" width="auto" height="200"><img src="images/Swagger.png" width="auto" height="200"><img src="images/Swagger2.png" width="auto" height="150"><img src="images/Swagger3.png" width="auto" height="200"><img src="images/Swagger4.png" width="auto" height="200"><img src="images/Diagrama.png" width="auto" height="200">
 
 
 
