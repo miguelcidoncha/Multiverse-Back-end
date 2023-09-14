@@ -30,7 +30,7 @@ namespace Multiverse.Controllers
         }
 
 
-        [HttpGet("ByCategory/{categoryId}", Name = "GetProductsByCategoryId")]
+        [HttpGet(Name = "GetProductsByCategoryId")]
         public IActionResult GetProductsByCategoryId(int categoryId)
         {
             IQueryable<ProductItem> productsQuery = _serviceContext.Set<ProductItem>();
@@ -50,16 +50,11 @@ namespace Multiverse.Controllers
 
 
         [HttpGet(Name = "GetProducts")]
-        public IActionResult GetProducts(string productName = null)
+        public IActionResult GetProducts()
         {
             IQueryable<ProductItem> productsQuery = _serviceContext.Set<ProductItem>();
-
-            if (!string.IsNullOrEmpty(productName))
-            {
-                productsQuery = productsQuery.Where(product => product.name == productName);
-            }
-
-            var products = productsQuery.ToList();
+          
+                 var products = productsQuery.ToList();
             return Ok(products);
         }
 
@@ -137,19 +132,19 @@ namespace Multiverse.Controllers
             }
         }
 
-        [HttpDelete("{productId}", Name = "DeleteProduct")]
-        public IActionResult Delete(int productId, [FromQuery] string userUser_Name, [FromQuery] string userPassword)
+        [HttpDelete(Name = "Delete")]
+        public IActionResult Delete([FromQuery]int productId)
         {
-            var selectedUser = _serviceContext.Set<UserItem>()
-               .Where(u => u.UserName == userUser_Name
-                    && u.Password == userPassword
-                    && u.IdRol == 1)
-               .FirstOrDefault();
+            //var selectedUser = _serviceContext.Set<UserItem>()
+            //   .Where(u => u.UserName == userUser_Name
+            //        && u.Password == userPassword
+            //        && u.IdRol == 1)
+            //   .FirstOrDefault();
 
-            if (selectedUser == null)
-            {
-                throw new InvalidCredentialException("Usuario no permitido");
-            }
+            //if (selectedUser == null)
+            //{
+            //    throw new InvalidCredentialException("Usuario no permitido");
+            //}
 
             if (productId > 0)
             {
