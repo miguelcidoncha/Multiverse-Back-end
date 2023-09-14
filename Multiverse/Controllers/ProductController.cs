@@ -53,14 +53,14 @@ namespace Multiverse.Controllers
         public IActionResult GetProducts()
         {
             IQueryable<ProductItem> productsQuery = _serviceContext.Set<ProductItem>();
-          
-                 var products = productsQuery.ToList();
+
+            var products = productsQuery.ToList();
             return Ok(products);
         }
 
 
 
-        //[HttpPost(Name = "InsertProduct")]
+       
         [HttpPost(Name = "Post")]
 
         //public int Post([FromQuery] string userUser_Name, [FromQuery] string userPassword, [FromBody] ProductItem productItem)
@@ -89,18 +89,18 @@ namespace Multiverse.Controllers
 
 
         [HttpPut("{id}", Name = "UpdateProduct")]
-        public IActionResult Put(int id, [FromBody] ProductItem updatedProductItem, [FromQuery] string userUser_Name, [FromQuery] string userPassword)
+        public IActionResult Put(int id, [FromBody] ProductItem updatedProductItem)
         {
-            var selectedUser = _serviceContext.Set<UserItem>()
-               .Where(u => u.UserName == userUser_Name
-                    && u.Password == userPassword
-                    && u.IdRol == 1)
-               .FirstOrDefault();
+            //var selectedUser = _serviceContext.Set<UserItem>()
+            //   .Where(u => u.UserName == userUser_Name
+            //        && u.Password == userPassword
+            //        && u.IdRol == 1)
+            //   .FirstOrDefault();
 
-            if (selectedUser == null)
-            {
-                throw new InvalidCredentialException("Usuario no permitido");
-            }
+            //if (selectedUser == null)
+            //{
+            //    throw new InvalidCredentialException("Usuario no permitido");
+            //}
 
             var existingProductItem = _serviceContext.Products.FirstOrDefault(p => p.IdProduct == id);
 
@@ -116,10 +116,11 @@ namespace Multiverse.Controllers
                     {
                         existingProductItem.image = updatedProductItem.image;
                     }
-
+                    
                     existingProductItem.name = updatedProductItem.name;
                     existingProductItem.price = updatedProductItem.price;
                     existingProductItem.description = updatedProductItem.description;
+
 
                     _productService.UpdateProduct(existingProductItem);
 
@@ -133,7 +134,7 @@ namespace Multiverse.Controllers
         }
 
         [HttpDelete(Name = "Delete")]
-        public IActionResult Delete([FromQuery]int productId)
+        public IActionResult Delete([FromQuery]int idProduct)
         {
             //var selectedUser = _serviceContext.Set<UserItem>()
             //   .Where(u => u.UserName == userUser_Name
@@ -146,15 +147,15 @@ namespace Multiverse.Controllers
             //    throw new InvalidCredentialException("Usuario no permitido");
             //}
 
-            if (productId > 0)
+            if (idProduct > 0)
             {
-                _productService.DeleteProduct(productId);
+                _productService.DeleteProduct(idProduct);
 
                 return Ok(new { message = "Producto eliminado exitosamente" });
             }
             else
             {
-                return BadRequest("El productId no es válido");
+                return BadRequest("El idProduct no es válido");
             }
         }
 
