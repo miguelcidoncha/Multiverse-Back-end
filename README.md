@@ -7,13 +7,12 @@
 
 "Multiverse-Back-End" is the continuation of the project "Multiverse-Project" (https://github.com/miguelcidoncha/Multiverse-Project). As we previously described, Multiverse is an e-commerce website designed to effectively sell merchandise products and provide customers with a satisfying shopping experience. In this repository, we have worked on the Back-end content related to the database. We have built an application to store all the data for our merchandise products, categorizing them and also storing customer information. Additionally, in this application, we will also store all the order information.
 
-## Screenshots (Coming Soon) 📷
+## Screenshots 📷
 
-**We're working on it!** <br>
+<img src="images/Back.png" width="auto" height="200"><img src="images/Back2.png" width="auto" height="200"><img src="images/Swagger.png" width="auto" height="200"><img src="images/Swagger2.png" width="auto" height="200"><img src="images/Swagger3.png" width="auto" height="200"><img src="images/Swagger4.png" width="auto" height="200">
 
-Screen images will be available here shortly. Stay tuned! <br>
 
-<img src="Campturas BootCamp/Captura de pantalla 2023-08-07 091818.png" width="250" height="200">
+
 
 
 ## Stacks 🖥️
@@ -46,17 +45,6 @@ Screen images will be available here shortly. Stay tuned! <br>
 - Dev: It's the branch where different working codes are integrated into one and where preliminary testing is done before production. It's an intermediate and/or safety branch. <br>
 - Independents: These are different branches where each team member develops their code according to assigned tasks for later merging into the Dev branch. It's an independent and/or testing branch. <br>
 + The branch methodology allows us to work collaboratively and maintain an organized and efficient workflow. Furthermore, working in branches allows us to work freely without conflicting with the work of other team members. Additionally, it provides us with greater control and a record or history of the various changes being made. On the other hand, for added security when merging codes from different branches, we have implemented security rules on GitHub where it is necessary to create a pull request prior to the merge.
-
-## Tests (Coming Soon) ☑️
-
-
-## Tests Screenshots (Coming Soon) ✔️
-
-**We're working on it!** <br>
-
-Screen images will be available here shortly. Stay tuned! <br>
-
-<img src="Campturas BootCamp/Captura de pantalla 2023-08-07 091818.png" width="250" height="200">
 
 ## Installation Process ⬆️
 1. Clone the GitHub repository: https://github.com/miguelcidoncha/Multiverse-Back-end.
