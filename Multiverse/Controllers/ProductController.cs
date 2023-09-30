@@ -116,7 +116,11 @@ namespace Multiverse.Controllers
                     {
                         existingProductItem.image = updatedProductItem.image;
                     }
+<<<<<<< HEAD
                     existingProductItem.type = updatedProductItem.type;
+=======
+                    
+>>>>>>> Laura
                     existingProductItem.name = updatedProductItem.name;
                     existingProductItem.price = updatedProductItem.price;
                     existingProductItem.description = updatedProductItem.description;
