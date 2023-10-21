@@ -7,7 +7,7 @@ namespace Multiverse.Services
     public class ProductService : BaseContextService, IProductService
     {
         public ProductService(ServiceContext serviceContext) : base(serviceContext)
-        { 
+        {
         }
 
 
@@ -17,8 +17,8 @@ namespace Multiverse.Services
         {
             try
             {
-               
-               
+
+
                 var category = _serviceContext.Set<Categories>().Where(c => c.CategoriesName == productItem.type).FirstOrDefault();
                 var categoryId = category.IdCategories;
                 productItem.IdCategories = categoryId;
@@ -29,7 +29,7 @@ namespace Multiverse.Services
             }
             catch (Exception ex)
             {
-               
+
                 throw ex;
             }
         }
@@ -56,6 +56,6 @@ namespace Multiverse.Services
             }
         }
 
-       
+
     }
 }
