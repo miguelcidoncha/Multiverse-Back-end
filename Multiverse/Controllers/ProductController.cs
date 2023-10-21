@@ -121,15 +121,13 @@ namespace Multiverse.Controllers
 
                     
 
-<<<<<<< HEAD
+
 
                     existingProductItem.type = updatedProductItem.type;
 
                     
 
 
-=======
->>>>>>> 1034cc65414e1fe65efa716e7d411ab6d7f7761a
                     existingProductItem.name = updatedProductItem.name;
                     existingProductItem.price = updatedProductItem.price;
                     existingProductItem.description = updatedProductItem.description;
