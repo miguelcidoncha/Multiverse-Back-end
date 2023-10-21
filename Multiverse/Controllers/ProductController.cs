@@ -60,11 +60,11 @@ namespace Multiverse.Controllers
 
 
 
-       
+
         [HttpPost(Name = "Post")]
 
         //public int Post([FromQuery] string userUser_Name, [FromQuery] string userPassword, [FromBody] ProductItem productItem)
-        public int Post([FromBody] ProductItem productItem )
+        public int Post([FromBody] ProductItem productItem)
         {
             //var seletedUser = _serviceContext.Set<UserItem>()
             //                   .Where(u => u.UserName == userUser_Name
@@ -75,7 +75,7 @@ namespace Multiverse.Controllers
 
             //if (seletedUser != null)
             //{
-                return _productService.insertProduct(productItem);
+            return _productService.insertProduct(productItem);
 
             //}
             //else
@@ -119,13 +119,6 @@ namespace Multiverse.Controllers
 
                     existingProductItem.type = updatedProductItem.type;
 
-                    
-
-
-
-                    existingProductItem.type = updatedProductItem.type;
-
-                    
 
 
                     existingProductItem.name = updatedProductItem.name;
@@ -145,7 +138,7 @@ namespace Multiverse.Controllers
         }
 
         [HttpDelete(Name = "Delete")]
-        public IActionResult Delete([FromQuery]int idProduct)
+        public IActionResult Delete([FromQuery] int idProduct)
         {
             //var selectedUser = _serviceContext.Set<UserItem>()
             //   .Where(u => u.UserName == userUser_Name
