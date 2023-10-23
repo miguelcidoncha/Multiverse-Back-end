@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20230910160509_Initial")]
+    [Migration("20230910170632_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -23,6 +23,50 @@ namespace Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Entities.Categories", b =>
+                {
+                    b.Property<int>("IdCategories")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategories"));
+
+                    b.Property<string>("CategoriesName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdCategories");
+
+                    b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.ProductItem", b =>
+                {
+                    b.Property<int>("IdProduct")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProduct"));
+
+                    b.Property<string>("ProductImageURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("productPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productStock")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdProduct");
+
+                    b.ToTable("Products");
+                });
 
             modelBuilder.Entity("Entities.RollItem", b =>
                 {

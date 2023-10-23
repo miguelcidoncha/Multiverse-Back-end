@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using System.Reflection.Emit;
 
 namespace Data
 {
     public class ServiceContext : DbContext
     {
         public ServiceContext(DbContextOptions<ServiceContext> options) : base(options) { }
-
-
-        public DbSet<UserItem> UserItems { get; set; }
-        public DbSet<RollItem> RollItems { get; set; }
-
+        public DbSet<ProductItem> Products { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
            
@@ -33,6 +33,13 @@ namespace Data
                 entity.ToTable("RollUser");
                 entity.HasKey(u => u.IdRoll);
             });
+
+            builder.Entity<Categories>(entity =>
+            {
+                entity.ToTable("Categories");
+            });
+
+
 
         }
     }
