@@ -19,6 +19,55 @@ namespace Multiverse.Controllers
             _userService = userService;
         }
 
+
+        [HttpGet(Name = "GetAllUsers")]
+        public IActionResult GetAllUsers([FromQuery] string userUserName, [FromQuery] string userPassword)
+        {
+            var selectedUser = _userService.AuthenticateUser(userUserName, userPassword);
+
+            if (selectedUser != null)
+            {
+                var users = _userService.GetAllUsers();
+                return Ok(users);
+            }
+            else
+            {
+                return Unauthorized("El usuario no está autorizado");
+            }
+        }
+
+
+
+        [HttpGet("{userId}", Name = "GetUserById")]
+        public IActionResult GetUserById(int userId, [FromQuery] string userUserName, [FromQuery] string userPassword)
+        {
+            var selectedUser = _userService.AuthenticateUser(userUserName, userPassword);
+
+            if (selectedUser != null)
+            {
+                var user = _userService.GetUserById(userId);
+
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else
+                {
+                    return NotFound("No se ha encontrado el Usuario");
+                }
+            }
+            else
+            {
+                return Unauthorized("El usuario no está autorizado");
+            }
+        }
+
+
+
+
+
+
+
         [HttpPost(Name = "InsertUsers")]
         public IActionResult Post([FromBody] UserItem userItem, [FromQuery] string userUserName, [FromQuery] string userPassword)
         {
@@ -47,7 +96,7 @@ namespace Multiverse.Controllers
                 if (user != null)
                 {
                     user.UserName = updatedUser.UserName;
-                    user.IdRoll = updatedUser.IdRoll;
+                    user.IdRol = updatedUser.IdRol;
                     user.Password = updatedUser.Password;
                     user.Email = updatedUser.Email;
 
@@ -94,3 +143,8 @@ namespace Multiverse.Controllers
     }
 
 }
+
+
+
+
+

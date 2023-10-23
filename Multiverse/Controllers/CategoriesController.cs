@@ -44,8 +44,19 @@ namespace Multiverse.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> Post([FromBody] Categories categories)
+        public ActionResult<int> Post([FromQuery] string userUser_Name, [FromQuery] string userPassword, [FromBody] Categories categories)
         {
+            var selectedUser = _serviceContext.Set<UserItem>()
+                .Where(u => u.UserName == userUser_Name
+                    && u.Password == userPassword
+                    && u.IdRol == 1)
+                .FirstOrDefault();
+
+            if (selectedUser == null)
+            {
+                throw new InvalidCredentialException("Usuario no permitido");
+            }
+
             if (categories == null)
             {
                 return BadRequest("Los datos de la categoría son nulos.");
@@ -56,8 +67,19 @@ namespace Multiverse.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Categories categories)
+        public IActionResult Put(int id, [FromQuery] string userUser_Name, [FromQuery] string userPassword, [FromBody] Categories categories)
         {
+            var selectedUser = _serviceContext.Set<UserItem>()
+                .Where(u => u.UserName == userUser_Name
+                    && u.Password == userPassword
+                    && u.IdRol == 1)
+                .FirstOrDefault();
+
+            if (selectedUser == null)
+            {
+                throw new InvalidCredentialException("Usuario no permitido");
+            }
+
             if (categories == null)
             {
                 return BadRequest("Los datos de la categoría son nulos.");
@@ -80,8 +102,19 @@ namespace Multiverse.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, [FromQuery] string userUser_Name, [FromQuery] string userPassword)
         {
+            var selectedUser = _serviceContext.Set<UserItem>()
+                .Where(u => u.UserName == userUser_Name
+                    && u.Password == userPassword
+                    && u.IdRol == 1)
+                .FirstOrDefault();
+
+            if (selectedUser == null)
+            {
+                throw new InvalidCredentialException("Usuario no permitido");
+            }
+
             try
             {
                 _categoriesService.DeleteCategories(id);
@@ -92,6 +125,7 @@ namespace Multiverse.Controllers
                 return NotFound(ex.Message);
             }
         }
+
     }
 
 }

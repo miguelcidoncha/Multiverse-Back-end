@@ -7,15 +7,34 @@ namespace Multiverse.Services
     public class ProductService : BaseContextService, IProductService
     {
         public ProductService(ServiceContext serviceContext) : base(serviceContext)
-        { 
+        {
         }
+
+
+
 
         public int insertProduct(ProductItem productItem)
         {
-            _serviceContext.Products.Add(productItem);
-            _serviceContext.SaveChanges();
-            return productItem.IdProduct;
+            try
+            {
+
+
+                var category = _serviceContext.Set<Categories>().Where(c => c.CategoriesName == productItem.type).FirstOrDefault();
+                var categoryId = category.IdCategories;
+                productItem.IdCategories = categoryId;
+                _serviceContext.Products.Add(productItem);
+                _serviceContext.SaveChanges();
+
+                return productItem.IdProduct;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
+
+
 
         void IProductService.UpdateProduct(ProductItem existingProductItem)
         {
@@ -36,5 +55,7 @@ namespace Multiverse.Services
                 throw new InvalidOperationException("El producto no existe.");
             }
         }
+
+
     }
 }

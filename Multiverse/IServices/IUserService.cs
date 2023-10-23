@@ -10,5 +10,6 @@ namespace Multiverse.IServices
         void UpdateUser(UserItem userItem);
         void DeleteUser(int userId);
         UserItem AuthenticateUser(string userName, string password);
+        UserItem GetUserByUserName(string userName); // Agregamos este método
     }
 }

@@ -7,13 +7,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities
 {
-    public class RollItem
+    public class RolItem
     {
 
-        public ushort IdRoll { get; set; }
-        public string RollName { get; set; }
-
-       
+        public int IdRol { get; set; }
+        public string RolName { get; set; }
 
 
     }
